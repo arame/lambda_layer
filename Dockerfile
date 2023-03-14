@@ -12,7 +12,7 @@
 
 # 4. docker build -t my-layer .
 # 5. docker run --name my-container my-layer
-# 6. docker cp my-container:/opt/python/aws-layer/my-layer.zip .
+# 6. docker cp my-container:/opt/python-3.9.6/aws-layer/my-layer.zip .
 # Your Layer is ready.
 
 FROM amazonlinux:latest
@@ -21,6 +21,7 @@ RUN yum install wget tar zip -y
 WORKDIR /opt
 RUN wget https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz
 RUN tar xzf Python-3.9.6.tgz
+COPY requirements.txt /opt/Python-3.9.6/requirements.txt
 WORKDIR /opt/Python-3.9.6
 RUN ./configure --enable-optimizations
 RUN make altinstall
